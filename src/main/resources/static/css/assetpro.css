@@ -1,0 +1,21 @@
+body {
+  padding-bottom: 100px;
+}
+
+.icons .fa, .icons .glyphicon, .icons .pficon {
+  font-size: 14px;
+  margin-right: 5px;
+  text-align: center;
+  width: 14px;
+}
+.icons .icon-class {
+  display: inline-block;
+}
+.icons li {
+  margin: 0 0 7px;
+}
+
+table.dataTable tbody>tr.selected {
+    color: #fff;
+    background-color: #39a5dc;
+}

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}" th:with="module='Customers'">
+<head>
+<meta charset="UTF-8" />
+<title>Users</title>
+ <link rel="stylesheet" th:href="@{/patternfly/node_modules/datatables.net-bs/css/dataTables.bootstrap.css}" >
+   
+</head>
+<body>
+
+	<div class="col-md-6" layout:fragment="breadcrumb">
+		<ul class="breadcrumb">
+			<li><a th:href="@{/}"><i class="fa fa-home"></i> Home</a></li>
+			<li><a th:href="@{/customers}"><i class="fa fa-users"></i>Customers</a></li>
+			<li class="active"><i class="fa fa-user"></i>Customer</li>
+		</ul>
+	</div>
+
+	<div class="row row-cards-pf" layout:fragment="content">
+
+			<div class="col-md-12">
+ <div class="row toolbar-pf">
+          <div class="col-sm-12">
+            <form class="toolbar-pf-actions">
+              
+              
+              <div class="form-group">
+                <button class="btn btn-default bt-link-act" th:href="@{/customers/new}" type="button">New</button>
+                <button class="btn btn-default bt-select bt-link-act" th:href="@{/customers/index/edit}" disabled="disabled" type="button">Edit</button>
+
+              </div>
+            <div class="col-md-4 pull-right">
+								<div class="input-group">
+									<input type="text" class="form-control" id="pattern" placeholder="Search for..."> <span
+										class="input-group-btn">
+										<button class="btn btn-success" id="search" type="button">Go!</button>
+									</span>
+								</div>
+								<!-- /input-group -->
+							</div>
+            </form>
+            <!-- /row -->
+            
+          </div><!-- /col -->
+        </div><!-- /row -->
+				<p></p>
+<table class="table table-striped dt-responsive nowrap table-bordered table-hover" id="table">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Contact</th>
+								</tr>
+							</thead>
+						</table>
+				
+			</div>
+
+		<!-- /.row -->
+
+	</div>
+</body>
+						
+
+
+
+<th:block layout:fragment="scripts">
+	<script th:src="@{/patternfly/node_modules/datatables.net/js/jquery.dataTables.js}"></script>
+	<script th:src="@{/patternfly/node_modules/datatables.net-select/js/dataTables.select.js}"></script>
+	<script th:src="@{/patternfly/node_modules/datatables.net-bs/js/dataTables.bootstrap.js}"></script>
+	<script th:src="@{/js/jquery.spring-friendly.min.js}"></script>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		$(document).ready(function() {
+			var table = $("#table").DataTable({
+				select : {
+					style : 'single'
+				},
+				"language" : {
+					"processing" : "<i class='fa fa-spinner fa-spin'/>"
+				},
+				dom : 'frtpl',
+				"lengthMenu" : [ [ 5, 10, -1 ], [ 5, 10, "All" ] ],
+				"pagingType" : "simple_numbers",
+				"searching" : false,
+				"processing" : true,
+				rowId : 'id',
+				"serverSide" : true,
+				"ordering" : false,
+				"ajax" : {
+					url : "customers/all",
+					"type" : "GET",
+					"data" : function(d) {
+						d.csearch = $('#pattern').val();
+					}
+				},
+				buttons : [ {
+					text : 'Open',
+					action : function(e, dt, node, config) {
+						alert('Row data: ' + JSON.stringify(dt.row({
+							selected : true
+						}).data()));
+					},
+					enabled : false
+				} ],
+				"columns" : [ {
+					"data" : "name"
+				}, {
+					"data" : "contact"
+				}]
+			});
+
+			table.on('select', function() {
+				if (table.rows({
+					selected : true
+				}).indexes().length === 0) {
+					$('.bt-select').attr("disabled", true);
+				} else {
+					$('.bt-select').removeAttr("disabled");
+				}
+
+			});
+
+			table.on('deselect', function() {
+				if (table.rows({
+					selected : true
+				}).indexes().length === 0) {
+					$('.bt-select').attr("disabled", true);
+				} else {
+					$('.bt-select').removeAttr("disabled");
+				}
+			});
+
+		});
+
+		$("button.bt-link-act").on("click", function(e) {
+			e.preventDefault();
+			var link = $(e.currentTarget);
+			if ($(link).attr("disabled")) {
+				return;
+			}
+
+			var dt = $('#table').DataTable();
+			var id = $(dt.row({
+				selected : true
+			}).node()).attr("id");
+			var ooo = link.attr("href").replace("index", id);
+			window.location.assign(ooo);
+
+		});
+
+		$("#delete-btn").on("click", function(e) {
+			e.preventDefault();
+			var link = $(e.currentTarget);
+			if ($(link).attr("disabled")) {
+				return;
+			}
+			var dt = $('#table').DataTable();
+			var id = $(dt.row({
+				selected : true
+			}).node()).attr("id");
+			//window.location.href = link.attr("formaction") + '?id=' + id;
+			//replace {id} with id
+			var ooo = link.attr("href").replace("index", id);
+
+			//goto url
+			warnBeforeRedirect(ooo);
+		});
+		
+		$("#search").on("click", function(e) {
+			e.preventDefault();
+			dt = $('#table').DataTable();
+			dt.ajax.reload(null, true);
+			
+		});
+
+		function warnBeforeRedirect(ooo) {
+			swal({
+				title : "Are you sure?",
+				text : "Are you sure that you want to delete this customer?",
+				type : "warning",
+				showCancelButton : true,
+				confirmButtonColor : "#DD6B55",
+				confirmButtonText : "Yes, delete customer!",
+				closeOnConfirm : false
+			}, function() {
+				// Redirect the user
+				window.location.assign(ooo);
+			});
+		}
+		/*]]>*/
+	</script>
+</th:block>
+</html>

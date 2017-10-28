@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<!--[if IE 9]><html lang="en-us" class="ie9 layout-pf layout-pf-fixed"><![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="layout-pf layout-pf-fixed" xmlns:th="http://www.thymeleaf.org"  xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+  <!--<![endif]-->
+    <head>
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">AssetPro</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" th:href="@{/patternfly/dist/img/favicon.ico}">
+    <!-- iPad retina icon -->
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" th:href="@{/patternfly/dist/img/apple-touch-icon-precomposed-152.png}">
+    <!-- iPad retina icon (iOS < 7) -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" th:href="@{/patternfly/dist/img/apple-touch-icon-precomposed-144.png}">
+    <!-- iPad non-retina icon -->
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" th:href="@{/patternfly/dist/img/apple-touch-icon-precomposed-76.png}">
+    <!-- iPad non-retina icon (iOS < 7) -->
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" th:href="@{/patternfly/dist/img/apple-touch-icon-precomposed-72.png}">
+    <!-- iPhone 6 Plus icon -->
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" th:href="@{/patternfly/dist/img/apple-touch-icon-precomposed-180.png}">
+    <!-- iPhone retina icon (iOS < 7) -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" th:href="@{/patternfly/dist/img/apple-touch-icon-precomposed-114.png}">
+    <!-- iPhone non-retina icon (iOS < 7) -->
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" th:href="@{/patternfly/dist/img/apple-touch-icon-precomposed-57.png}">
+    <link rel="stylesheet" th:href="@{/patternfly/dist/css/patternfly.min.css}" >
+    <link rel="stylesheet" th:href="@{/patternfly/dist/css/patternfly-additions.min.css}" >
+      <link th:href="@{/css/assetpro.css}" rel="stylesheet" media="screen, print">
+    <script th:src="@{/patternfly/node_modules/jquery/dist/jquery.js}"></script>
+    <script th:src="@{/patternfly/node_modules/bootstrap/dist/js/bootstrap.js}"></script>
+    <script th:src="@{/patternfly/node_modules/jquery-match-height/jquery.matchHeight.js}"></script>
+    <script th:src="@{/patternfly/node_modules/c3/c3.min.js}"></script>
+    <script th:src="@{/patternfly/node_modules/d3/d3.min.js}"></script>
+    <script th:src="@{/patternfly/dist/js/patternfly.min.js}"></script>
+  </head>
+
+  <body class="cards-pf">
+    
+  <nav class="navbar navbar-pf-vertical">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a th:href="@{/}" class="navbar-brand">
+      <img class="navbar-brand-icon" th:src="@{/patternfly/dist/img/logo-alt.svg}" alt=""/><img class="navbar-brand-name" th:src="@{/patternfly/dist/img/brand-alt.svg}" alt="PatternFly Enterprise Application" />
+    </a>
+  </div>
+  <nav class="collapse navbar-collapse">
+    <ul class="nav navbar-nav navbar-right navbar-iconic">
+      <li class="dropdown">
+        <a class="dropdown-toggle nav-item-iconic" id="notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <span title="Notifications" class="fa pficon-flag"></span>
+          <span class="badge">2</span>
+        </a>
+        <div class="dropdown-menu infotip bottom-right">
+          <div class="arrow"></div>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <span class="i pficon pficon-info"></span> Modified Datasources ExampleDS
+            </li>
+            <li class="list-group-item">
+              <span class="i pficon pficon-info"></span> Error: System Failure
+            </li>
+          </ul>
+          <div class="footer">
+            <a>Clear Messages</a>
+          </div>
+        </div>
+      </li>
+      <li class="dropdown">
+        <a class="dropdown-toggle nav-item-iconic" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <span title="Help" class="fa pficon-help"></span>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li><a href="#">Help</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a class="dropdown-toggle nav-item-iconic" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <span title="Username" class="fa pficon-user"></span>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <li><a href="#">Preferences</a></li>
+          <li><a href="#">Logout</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</nav> <!--/.navbar-->
+
+
+<div class="nav-pf-vertical nav-pf-vertical-with-sub-menus
+     
+     
+     
+     ">
+  <ul class="list-group">
+    <li class="list-group-item">
+      <a>
+        <span class="fa fa-dashboard" data-toggle="tooltip" title="Dashboard"></span>
+        <span class="list-group-item-value">Dashboard</span>
+      </a>
+    </li>
+    <li class="list-group-item">
+      <a>
+        <span class="fa fa-shield" data-toggle="tooltip" title="Dolor"></span>
+        <span class="list-group-item-value">Dolor</span>
+        
+      </a>
+    </li>
+    <li class="list-group-item active " data-target="#ipsum-secondary">
+      <a>
+        <span class="fa fa-space-shuttle" data-toggle="tooltip" title="Ipsum"></span>
+        <span class="list-group-item-value">Ipsum</span>
+      </a>
+      
+    </li>
+    <li class="list-group-item " data-target="#amet-secondary">
+      <a>
+        <span class="fa fa-paper-plane" data-toggle="tooltip" title="Amet"></span>
+        <span class="list-group-item-value">Amet</span>
+      </a>
+      
+    </li>
+    <li class="list-group-item">
+      <a>
+        <span class="fa fa-graduation-cap" data-toggle="tooltip" title="Adipscing"></span>
+        <span class="list-group-item-value">Adipscing</span>
+      </a>
+    </li>
+    <li class="list-group-item">
+      <a>
+        <span class="fa fa-gamepad" data-toggle="tooltip" title="Lorem"></span>
+        <span class="list-group-item-value">Lorem</span>
+      </a>
+    </li>
+
+    <li class="list-group-item secondary-nav-item-pf mobile-nav-item-pf visible-xs-block" data-target="#amet-secondary">
+      <a>
+        <span class="pficon pficon-user" data-toggle="tooltip" title="" data-original-title="User"></span>
+        <span class="list-group-item-value">User</span>
+      </a>
+      <div id="user-secondary" class="nav-pf-secondary-nav">
+        <div class="nav-item-pf-header">
+          <a class="secondary-collapse-toggle-pf" data-toggle="collapse-secondary-nav"></a>
+          <span>User</span>
+        </div>
+
+        <ul class="list-group">
+          <li class="list-group-item">
+            <a>
+              <span class="list-group-item-value">Preferences</span>
+            </a>
+          </li>
+
+          <li class="list-group-item">
+            <a>
+              <span class="list-group-item-value">Logout</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="list-group-item secondary-nav-item-pf mobile-nav-item-pf visible-xs-block" data-target="#amet-secondary">
+      <a>
+        <span class="pficon pficon-help" data-toggle="tooltip" title="" data-original-title="Amet"></span>
+        <span class="list-group-item-value">Help</span>
+      </a>
+      <div id="help-secondary" class="nav-pf-secondary-nav">
+        <div class="nav-item-pf-header">
+          <a class="secondary-collapse-toggle-pf" data-toggle="collapse-secondary-nav"></a>
+          <span>Help</span>
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <a>
+              <span class="list-group-item-value">Help</span>
+            </a>
+          </li>
+          <li class="list-group-item">
+            <a>
+              <span class="list-group-item-value">About</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+  </ul>
+
+</div>
+<div class="container-fluid container-cards-pf container-pf-nav-pf-vertical
+     
+     
+     ">
+
+      <div class="row row-cards-pf">
+      <!-- Important:  if you need to nest additional .row within a .row.row-cards-pf, do *not* use .row-cards-pf on the nested .row  -->
+<div class="card-pf">
+  <div class="card-pf-heading">
+    
+    <h2 class="card-pf-title">
+      [[${module}]]
+    </h2>
+  </div>
+  <div class="card-pf-body" layout:fragment="content" >
+    <p>[card contents]</p>
+  </div>
+</div>
+      </div><!-- /row -->
+      
+
+</div>
+<th:block layout:fragment="scripts">
+</th:block>
+<script>
+  $(document).ready(function() {
+    // matchHeight the contents of each .card-pf and then the .card-pf itself
+    $(".row-cards-pf > [class*='col'] > .card-pf .card-pf-title").matchHeight();
+    $(".row-cards-pf > [class*='col'] > .card-pf > .card-pf-body").matchHeight();
+    $(".row-cards-pf > [class*='col'] > .card-pf > .card-pf-footer").matchHeight();
+    $(".row-cards-pf > [class*='col'] > .card-pf").matchHeight();
+
+    // Initialize the vertical navigation
+    $().setupVerticalNavigation(true);
+  });
+</script>
+
+
+  </body>
+</html>

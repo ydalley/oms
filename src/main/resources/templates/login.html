@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html class="login-pf" xmlns:th="http://www.thymeleaf.org"  xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+ <head>
+    <title>Login - OMS</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" th:href="@{patternfly/dist/img/favicon.ico}">
+    <!-- iPad retina icon -->
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" th:href="@{/patternfly/dist/img/apple-touch-icon-precomposed-152.png}">
+    <!-- iPad retina icon (iOS < 7) -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" th:href="@{/patternfly/dist/img/apple-touch-icon-precomposed-144.png}">
+    <!-- iPad non-retina icon -->
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" th:href="@{/patternfly/dist/img/apple-touch-icon-precomposed-76.png}">
+    <!-- iPad non-retina icon (iOS < 7) -->
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" th:href="@{/patternfly/dist/img/apple-touch-icon-precomposed-72.png}">
+    <!-- iPhone 6 Plus icon -->
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" th:href="@{/patternfly/dist/img/apple-touch-icon-precomposed-180.png}">
+    <!-- iPhone retina icon (iOS < 7) -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" th:href="@{/patternfly/dist/img/apple-touch-icon-precomposed-114.png}">
+    <!-- iPhone non-retina icon (iOS < 7) -->
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" th:href="@{/patternfly/dist/img/apple-touch-icon-precomposed-57.png}">
+    <link rel="stylesheet" th:href="@{/patternfly/dist/css/patternfly.min.css}" >
+    <link rel="stylesheet" th:href="@{/patternfly/dist/css/patternfly-additions.min.css}" >
+    <!--   <link href="tests.css" rel="stylesheet" media="screen, print"> -->
+    <script th:src="@{/patternfly/node_modules/jquery/dist/jquery.js}"></script>
+    <script th:src="@{/patternfly/node_modules/bootstrap/dist/js/bootstrap.js}"></script>
+    <script th:src="@{/patternfly/dist/js/patternfly.min.js}"></script>
+  </head>
+  
+  <th:block th:if="${shiroLoginFailure != null}">
+	<div class="toast-notifications-list-pf">
+		    <div class="toast-pf alert  alert-danger  alert-dismissable">
+		      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+		        <span class="pficon pficon-close"></span>
+		      </button>
+		      <span class="pficon pficon-error-circle-o"></span>
+		      <div th:switch="${shiroLoginFailure}">
+				<p th:case="'org.apache.shiro.authc.IncorrectCredentialsException'">Wrong Credentials provided</p>
+				<p th:case="'org.apache.shiro.authc.AuthenticationException'">Unknown Credentials provided</p>
+				<p th:case="*">Unknown error</p>
+			</div>
+		         </div>
+  </div>
+		
+	</th:block>
+
+  <body>
+<span id="badge">
+  <img th:src="@{/patternfly/dist/img/logo.svg}" alt="PatternFly logo" />
+</span>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div id="brand">
+      </div><!--/#brand-->
+    </div><!--/.col-*-->
+    <div class="col-sm-7 col-md-6 col-lg-5 login">
+      <form class="form-horizontal" role="form" method="post">
+        <div class="form-group">
+          <label for="inputUsername" class="col-sm-2 col-md-2 control-label">Username</label>
+          <div class="col-sm-10 col-md-10">
+            <input type="text" class="form-control" id="inputUsername" name="username" placeholder="" tabindex="1">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword" class="col-sm-2 col-md-2 control-label">Password</label>
+          <div class="col-sm-10 col-md-10">
+            <input type="password" class="form-control" id="inputPassword" name="password" placeholder="" tabindex="2">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-xs-8 col-sm-offset-2 col-sm-6 col-md-offset-2 col-md-6">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" tabindex="3"> Remember username
+              </label>
+            </div>
+            <span class="help-block"> Forgot <a href="#" tabindex="5">username</a> or <a href="#" tabindex="6">password</a>?</span>
+          </div>
+          <div class="col-xs-4 col-sm-4 col-md-4 submit">
+            <button type="submit" class="btn btn-primary btn-lg" tabindex="4">Log In</button>
+          </div>
+        </div>
+      </form>
+    </div><!--/.col-*-->
+    <div class="col-sm-5 col-md-6 col-lg-7 details">
+      <strong>Welcome to Order Management System!</strong>
+        
+    </div><!--/.col-*-->
+  </div><!--/.row-->
+</div><!--/.container-->
+
+
+  </body>
+</html>

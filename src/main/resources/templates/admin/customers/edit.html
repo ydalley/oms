@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}" th:with="module='Customer Details'">
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div class="col-md-6" layout:fragment="breadcrumb">
+		<ul class="breadcrumb">
+			<li><a th:href="@{/}"><i class="fa fa-home"></i> Home</a></li>
+			<li><a th:href="@{/customers}"><i class="fa fa-users"></i>Customers</a></li>
+			<li class="active"><i class="fa fa-user"></i>Customer</li>
+		</ul>
+	</div>
+
+	<div class="row row-cards-pf" layout:fragment="content">
+
+			<div class="col-md-12">
+
+				<p></p>
+
+				<form class="form-horizontal" method="POST" th:object="${customer}" th:action="@{/customers}">
+						<div hidden="hidden">
+								<ul id="fieldErrors" th:if="${#fields.hasErrors('*')}">
+									<li th:each="e : ${#fields.detailedErrors()}" th:text="${e.global}? '*' : ${e.fieldName}"></li>
+								</ul>
+							</div>
+							<div hidden="hidden">
+								<ul id="fieldMessages" th:if="${#fields.hasErrors('*')}" >
+									<li th:each="e : ${#fields.detailedErrors()}" th:attr="field=${e.fieldName}" th:text="${e.message}"></li>
+								</ul>
+							</div>
+							<div class="form-group">
+
+								<div class="form-group">
+									<label for="name" class="col-sm-2 control-label" style="text-align: left">Name</label>
+									<div class="col-sm-10">
+										<input type="text" th:field="*{name}" class="form-control" id="name">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="contact" class="col-sm-2 control-label" style="text-align: left">Contact</label>
+									<div class="col-sm-10">
+										<input type="text" th:field="*{contact}" class="form-control" id="contact">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="mobile" class="col-sm-2 control-label" style="text-align: left">Mobile</label>
+									<div class="col-sm-10">
+										<input type="text" th:field="*{mobile}" class="form-control" id="mobile">
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="address" class="col-sm-2 control-label" style="text-align: left">Address</label>
+									<div class="col-sm-10">
+										<input type="text" th:field="*{address}" class="form-control" id="address">
+									</div>
+								</div>
+
+							<input  th:hidden="hidden" th:field="*{version}"/>
+									<input  th:hidden="hidden" th:field="*{id}"/>
+								<button type="submit" class="btn btn-success btn-labeled pull-right">
+									Submit<span class="btn-label btn-label-right"><i class="fa fa-check"></i></span>
+								</button>
+							</div>
+
+							<div class="form-group col-sm-2"></div>
+
+						</form>
+			</div>
+
+		<!-- /.row -->
+
+	</div>
+</body>

@@ -1,0 +1,19 @@
+category,description,name
+Locations,View All Locations,:locations
+Locations,Update Locations,update:locations
+Locations,Create new Locations,create:locations
+Status Labels,View All Status Labels,:status_labels
+Status Labels,Update Status Labels,update:status_labels
+Status Labels,Create new Status Labels,create:status_labels
+Users,Create Users,create:user
+Users,Set User Passwords,password:user
+Permissions,Edit Permissions,update:option
+Permissions,Create Permissions,create:option
+Users,Update Users,update:user
+Users,Enable or Disable Users,enable:user
+Order,Create Orders,create:orders
+Orders,View All Orders,:orders
+Orders,Update Order,update:orders
+Agents,Create Agents,create:agents
+Agents,View All Agents,:agents
+Agents,Update Person,update:agents

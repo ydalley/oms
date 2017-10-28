@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+</head>
+<body>
+
+<div class="col-md-6" layout:fragment="breadcrumb">
+    <ul class="breadcrumb">
+        <li><a th:href="@{/}"><i class="fa fa-home"></i> Home</a></li>
+        
+    </ul>
+</div>
+
+<div class="container-fluid" layout:fragment="content">
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <p></p>
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <h5>Dashboard</h5>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+    <!-- /.row -->
+
+</div>
+</body>
